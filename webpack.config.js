@@ -63,6 +63,32 @@ module.exports = {
                 ],
                 // 要排除的文件
                 exclude: /node-modules/
+            },
+
+            // 设置less文件的处理, use中写在下面的先执行
+            {
+                test: /\.less$/,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    // 引入postcss
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            postcssOptions:{
+                                plugins:[
+                                    [
+                                        "postcss-preset-env",
+                                        {
+                                            browsers:"last 2 versions"
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    },
+                    "less-loader"
+                ]
             }
         ]
     },
@@ -71,7 +97,8 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HTMLWebpackPlugin({
-            title: "My App"
+            // title: "自定义title"
+            template: "./src/index.html"
         }),
     ],
 
