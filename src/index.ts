@@ -1,4 +1,4 @@
-//引入样式
+//import style and class
 import "./style/index.less";
 
 import GameControl from "./moduls/GameControl";

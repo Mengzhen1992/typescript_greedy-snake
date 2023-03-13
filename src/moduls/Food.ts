@@ -1,27 +1,25 @@
-//定义food
 class Food{
-    // 定义一个属性表示食物所对应的元素
+    // define an attribute to represent the element
     element: HTMLElement;
     constructor(){
-        // 获取页面中的food元素并将其赋值给element
         this.element = document.getElementById("food")!;
     }
 
-    // 定义一个获取食物x轴坐标的方法
+    // define a method to get the x-value of the food
     get X(){
         return this.element.offsetLeft;
     }
 
-    // 定义一个获取食物y轴坐标的方法
+    // define a method to get the y-value of the food
     get Y(){
         return this.element.offsetTop;
     }
 
-    // 修改食物的位置
+    // modify the position of the food
     change(){
-        // 生成一个随机的位置
-        // 食物的位置最小是0 最大是290
-        // 蛇移动一次就是一格，一格的大小就是10，所以要求食物的坐标必须是整10
+        // generate a random position for the food
+        // the position of the food is min 0 and max 290
+        // the coordinate of the food must be a multiple of 10
         let top = Math.round(Math.random() * 29) * 10;
         let left = Math.round(Math.random() * 29) * 10;
         this.element.style.left = top + "px";

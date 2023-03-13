@@ -1,57 +1,57 @@
-// 引入一个包
+// import a package
 const path = require('path');
-// 引入html插件
+// import html plugin
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-// 引入clean插件
+// import clean plugin
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
-// webpack中的所有的配置信息都应该写在module.exports中
+// all configuration information in webpack should be written in module.exports
 module.exports = {
-    // 指定入口文件
+    // specify the entry file
     entry: "./src/index.ts",
 
-    // 指定打包文件所在目录
+    // specify the directory where the package file is located 
     output: {
-        // 指定打包文件的目录
+        // specify the directory of the package file
         path: path.resolve(__dirname, "dist"),
-        // 打包后文件的文件
+        // files of packed files
         filename: "bundle.js",
-        // 告诉webpack不使用箭头函数, 可以兼容IE11
+        // tell webpack not to use arrow functions
         environment: {
             arrowFunction: false
         }
     },
 
-    // 指定webpack打包时要使用模块
+    // specify the module to be used when webpack is packaged
     module: {
-        // 指定要加载的规则
+        // specifies the rules to load
         rules: [
             {
-                // test指定规则生效的文件
+                // test specifies the file in which the rule takes effect
                 test: /\.ts$/,
-                // 要使用的loader
+                // loader to use
                 use: [
-                    //配置babel
+                    //configure babel
                     {
-                      //指定加载器
+                      //specified loader
                       loader: "babel-loader",
-                      //设置babel
+                      //set up babel
                       options: {
-                          // 设置预定义的环境
+                          // set up a predefined environment
                           presets:[
                               [
-                                  // 指定环境的插件
+                                  // plugins for specific environments
                                   "@babel/preset-env",
-                                  // 配置信息
+                                  // configuration information
                                   {   
-                                      // 要兼容的目标浏览器
+                                      // target browsers to be compatible
                                       targets: {
                                           "chrome": "88",
                                           "ie":"11"
                                       },
-                                      // 指定corejs的版本
+                                      // specify the version of corejs
                                       "corejs":"3",
-                                      // 使用corejs的方式"usage"表示按需加载
+                                      // "usage" using corejs means loading on demand
                                       "useBuiltIns":"usage"
                         
                                   }
@@ -61,17 +61,17 @@ module.exports = {
                     },
                     "ts-loader"
                 ],
-                // 要排除的文件
+                // files to exclude
                 exclude: /node-modules/
             },
 
-            // 设置less文件的处理, use中写在下面的先执行
+            // set the processing of less files, the ones written below in use are executed first
             {
                 test: /\.less$/,
                 use: [
                     "style-loader",
                     "css-loader",
-                    // 引入postcss
+                    // import postcss
                     {
                         loader: "postcss-loader",
                         options: {
@@ -93,16 +93,16 @@ module.exports = {
         ]
     },
 
-    // 配置Webpack插件
+    // configure the Webpack plugin
     plugins: [
         new CleanWebpackPlugin(),
         new HTMLWebpackPlugin({
-            // title: "自定义title"
+            // title: "custom title"
             template: "./src/index.html"
         }),
     ],
 
-    // 用来设置引用模块
+    // used to set the reference module
     resolve: {
         extensions: [".ts", ".js"]
     },
